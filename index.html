@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Weather Dashboard</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 24px auto; padding: 0 16px; }
+    .controls { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+    .cards { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 12px 16px; min-width: 160px; }
+    .card strong { display: block; font-size: 1.5em; }
+    .error { color: #c00; }
+    .chart-box { position: relative; height: 360px; }
+    footer { margin-top: 32px; color: #bbb; font-size: 0.85em; text-align: center; }
+    footer a { color: inherit; }
+  </style>
+</head>
+<body>
+  <h1>Site Weather Dashboard</h1>
+  <p>Check whether wind and rain allow crane lifts and concrete pours at construction sites in Taiwan over the next 48 hours.</p>
+
+  <div class="controls">
+    <label>
+      Site:
+      <select id="siteSelect">
+        <option value="25.03,121.56">Taipei</option>
+        <option value="24.15,120.67">Taichung</option>
+        <option value="22.63,120.30">Kaohsiung</option>
+        <option value="23.57,119.58">Penghu</option>
+      </select>
+    </label>
+    <label>
+      Wind limit (km/h):
+      <input id="limitInput" type="number" value="30" min="0" style="width: 5em">
+    </label>
+  </div>
+
+  <p id="status">Loading…</p>
+
+  <div class="cards">
+    <div class="card">Max wind <strong id="maxWind">–</strong></div>
+    <div class="card">Hours over wind limit <strong id="windHours">–</strong></div>
+    <div class="card">Hours with rain chance ≥ 50% <strong id="rainHours">–</strong></div>
+  </div>
+
+  <div class="chart-box">
+    <canvas id="weatherChart"></canvas>
+  </div>
+
+  <footer>
+    Made by Cami · Weather data by <a href="https://open-meteo.com/" target="_blank">Open-Meteo.com</a> (CC BY 4.0)
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
