@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Site Weather Dashboard — Project Summary</title>
+  <style>
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #ffffff; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: #0f172a;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page { width: 210mm; height: 297mm; padding: 15mm 15mm 12mm; display: flex; flex-direction: column; }
+
+    .eyebrow { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #64748b; font-weight: 600; }
+    h1 { font-size: 32px; line-height: 1.15; margin: 6px 0 6px; letter-spacing: -.01em; }
+    .meta { font-size: 12.5px; color: #475569; display: flex; gap: 18px; flex-wrap: wrap; }
+    .meta b { color: #0f172a; font-weight: 600; }
+    .meta a { color: #2563eb; text-decoration: none; font-weight: 600; }
+    .rule { height: 4px; border-radius: 2px; margin: 14px 0 20px;
+            background: linear-gradient(90deg, #2563eb 0 33%, #059669 33% 66%, #ea580c 66% 100%); }
+
+    h2 { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #334155; margin: 0 0 10px; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+    .card { border: 1px solid #e2e8f0; border-top: 4px solid var(--c); border-radius: 10px; padding: 11px 14px 12px; background: #fff; }
+    .card h3 { margin: 0 0 5px; font-size: 13.5px; color: var(--c); display: flex; align-items: center; gap: 7px; }
+    .card h3 .dot { width: 20px; height: 20px; border-radius: 50%; background: var(--c); color: #fff;
+                    font-size: 11px; display: inline-flex; align-items: center; justify-content: center; }
+    .card p { margin: 0; font-size: 12.5px; line-height: 1.5; color: #1e293b; }
+
+    .diagram { border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; }
+    .diagram img { width: 100%; display: block; }
+    .caption { font-size: 11.5px; color: #64748b; margin: 0 0 10px; }
+
+    footer { margin-top: auto; padding-top: 10px; font-size: 10.5px; color: #94a3b8; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="eyebrow">Assignment 2 · API Data Visualization &amp; Dashboards · Development of APP in AEC Industries</div>
+    <h1>Site Weather Dashboard</h1>
+    <div class="meta">
+      <span><b>Made by</b> Cami</span>
+      <span><b>Live site</b> <a href="https://camifatechab.github.io/site-weather-dashboard/">camifatechab.github.io/site-weather-dashboard</a></span>
+      <span><b>API</b> Open-Meteo Forecast</span>
+    </div>
+    <div class="rule"></div>
+
+    <h2>Project summary</h2>
+    <div class="grid">
+      <div class="card" style="--c:#334155">
+        <h3>Purpose</h3>
+        <p>Helps construction teams in Taiwan check whether the next 48 hours are suitable for crane lifts and concrete pours. Site managers can compare four Taiwanese cities and set their own crane wind limit.</p>
+      </div>
+      <div class="card" style="--c:#2563eb">
+        <h3>API and data</h3>
+        <p>Uses the free Open-Meteo Forecast API. When the page loads, or when the user picks a site (Taipei, Taichung, Kaohsiung or Penghu), JavaScript sends an HTTP GET request with that site's coordinates. The API returns JSON with 48 hourly values of temperature, rain probability and wind speed.</p>
+      </div>
+      <div class="card" style="--c:#059669">
+        <h3>Processing</h3>
+        <p>The frontend parses the JSON, formats timestamps into chart labels, finds the maximum wind speed, and counts the hours above a user-defined wind limit and the hours with at least a 50% chance of rain.</p>
+      </div>
+      <div class="card" style="--c:#7c3aed">
+        <h3>Visualization</h3>
+        <p>Results appear as three summary cards and a Chart.js line chart with a dashed wind-limit line. Changing the limit recalculates instantly without a new request, and failed requests show an error message.</p>
+      </div>
+    </div>
+
+    <h2>System diagram — data flow</h2>
+    <p class="caption">The request travels along the top (steps 1–2) and the response comes back along the bottom (steps 3–4).</p>
+    <div class="diagram">
+      <img src="diagram.svg" alt="Data flow: the user picks a site, the browser builds the request URL and sends an HTTP GET to the Open-Meteo API, the API returns JSON, the browser parses it and shows summary cards and a chart. Changing the wind limit only recounts and redraws.">
+    </div>
+
+    <footer>Weather data by Open-Meteo.com (CC BY 4.0) · Made by Cami</footer>
+  </div>
+</body>
+</html>
